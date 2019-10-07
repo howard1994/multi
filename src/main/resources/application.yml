@@ -1,0 +1,60 @@
+
+swagger:
+  # 是否启用swagger，默认：true
+  enabled: true
+  # 标题
+  title: "Swagger2"
+  # swagger扫描的基础包，默认：全扫描
+  base-package: "com.data.source.multi.demo.controller"
+  # 需要处理的基础URL规则，默认：/**
+  base-path: /**
+server:
+  port: 8888
+spring:
+  thymeleaf:
+    cache: false
+  datasource:
+    erp:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://218.28.44.115:6432/online_server
+      username: postgres
+      password: admin
+    slave:
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      url: jdbc:sqlserver://218.28.44.115:8888;database=shiro
+      username: sa
+      password: longqi.123
+    master:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.1.18:3306/myshiro?serverTimezone=UTC&characterEncoding=utf8
+      username: root
+      password: 123329
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 10
+    max-active: 100
+    min-idle: 10
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    stat-view-servlet:
+      enabled: true
+      url-pattern: /druid/*
+      login-username: admin
+      login-password: admin
+    filter:
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: true
+      wall:
+        config:
+          multi-statement-allow: true
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
